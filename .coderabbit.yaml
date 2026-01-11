@@ -33,6 +33,7 @@ reviews:
     - "!**/*.lock"
 
     # Include source and docs
+    - "**/*.html"
     - "**/*.ts"
     - "**/*.tsx"
     - "**/*.js"
@@ -43,6 +44,15 @@ reviews:
     - "docs/**"
 
   path_instructions:
+    - path: "**/*.html"
+      instructions: |
+        You are reviewing HTML files (fully static, build-time templates, or runtime templates).
+        Enforce semantic HTML5 structure: proper use of <header>, <nav>, <main>, and <footer>.
+        Ensure WCAG 2.1 Level AA conformance (correct ARIA roles/attributes, alt text for images, sufficient contrast).
+        Reject deprecated HTML elements like <center>, <font>, <strike>, etc.
+        Prevent XSS by ensuring no unescaped user input is present in templates.
+        Verify correct meta/document structure (lang attribute, viewport, charset).
+
     - path: "docs/**"
       instructions: |
         You are reviewing documentation changes.
