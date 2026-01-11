@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+
+reviews:
+  profile: "assertive"
+  request_changes_workflow: true
+  high_level_summary: true
+  review_status: true
+  collapse_walkthrough: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+
+  path_filters:
+    # Exclude generated and vendor artifacts
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/build/**"
+    - "!**/.next/**"
+    - "!**/coverage/**"
+    - "!**/*.min.*"
+    - "!**/*.lock"
+
+    # Include source and docs
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.js"
+    - "**/*.jsx"
+    - "**/*.json"
+    - "**/*.yml"
+    - "**/*.yaml"
+    - "docs/**"
+
+  path_instructions:
+    - path: "docs/**"
+      instructions: |
+        You are reviewing documentation changes.
+        Enforce markdownlint-friendly formatting.
+        Require blank lines around headings (MD022).
+        Reject ambiguous statements. Prefer clear, testable requirements.
+        If APIs or data model changes are described, ensure they match docs/architecture/API.md and docs/architecture/DATA_MODEL.md.
+
+    - path: "**/*.{ts,tsx,js,jsx}"
+      instructions: |
+        You are reviewing application code.
+        Enforce security-first defaults, input validation, and least privilege.
+        All API request bodies and event payloads must be schema-validated server-side (Zod).
+        Trade events must be append-only. No updates or deletes.
+        Ensure idempotency for retryable endpoints and worker jobs.
+
+    - path: "**/docker-compose*.yml"
+      instructions: |
+        You are reviewing docker-compose definitions.
+        Enforce local-first: no paid external dependencies required to run.
+        Avoid exposing database ports publicly unless explicitly justified.
+        Ensure volumes exist for Postgres and MinIO persistence.
+
+chat:
+  auto_reply: true
