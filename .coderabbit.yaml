@@ -1,6 +1,16 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
 language: "en-US"
 
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "CODE_GUIDELINES.md"
+      - "docs/standards/REVIEW_CHECKLIST.md"
+      - "docs/standards/PR_NAMING.md"
+      - "docs/standards/CODING_STANDARDS.md"
+
+
 reviews:
   profile: "assertive"
   request_changes_workflow: true
