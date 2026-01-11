@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom/client'
 
 const App = () => {
   return (
-    <div>
-      <h1>Prop Firm Trader Journal</h1>
-      <p>Hello World</p>
-    </div>
+    <>
+      <header>
+        <h1>Prop Firm Trader Journal</h1>
+      </header>
+      <main>
+        <p>Hello World</p>
+      </main>
+    </>
   )
 }
 
